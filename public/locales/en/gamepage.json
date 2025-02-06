@@ -1,0 +1,18 @@
+{
+    "game_title": "Jumping Grid Game",
+    "game_description": "Explore the ecosystem world and collect rewards",
+    "game_status": "Game Status",
+    "current_game_status": "Current Game Progress and Score",
+    "current_score": "Current Score",
+    "remaining_times": "Remaining Times",
+    "free_attempts_today": "You have",
+    "times_left": "free attempts left today",
+    "game_instructions": "Game Instructions",
+    "game_rules": "Learn the game rules",
+    "dice_button_instruction": "Click the 'Roll Dice' button to move using attempts",
+    "free_attempts_instruction": "One free attempt per day, after using it, you need to buy more using LAT (10 LAT per attempt)",
+    "special_tile_instruction": "Colored tiles are surprise tiles, may give special rewards",
+    "normal_tile_instruction": "White tiles are regular tiles",
+    "win_instruction": "Move along the path and reach the 100th tile to win!",
+    "reward_instruction": "After winning, go to the rewards center to redeem your rewards"
+  }

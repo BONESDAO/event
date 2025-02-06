@@ -1,0 +1,16 @@
+{
+      "back_to_game": "返回游戏界面",
+      "title": "奖励中心",
+      "description": "用你的积分兑换精彩奖励",
+      "myPoints": "我的积分",
+      "canRedeem": "你可以用这些积分兑换下方的奖励",
+      "points": "积分",
+      "sdwhPoints": "sDWH 积分",
+      "rewardRequiredPoints": "所需积分: ",
+      "redeem": "兑换",
+      "notEnoughPoints": "您的积分不足，无法兑换此奖励！",
+      "walletNotConnected": "请先连接钱包！",
+      "exchangeSuccess": "兑换成功！",
+      "exchangeSuccessDescription": "你已成功兑换 {amount} {rewardName}"
+
+  }

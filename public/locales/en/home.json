@@ -1,0 +1,14 @@
+{
+  "walletAddress": "Wallet Address:",
+  "currentScore": "Current Score:",
+  "checkIn": "Click here to check in 😀",
+  "alreadyCheckedIn_1": "Already",
+  "alreadyCheckedIn_2": "people checked in!",
+  "exploreJourney_1": "Explore the world of ecology",
+  "exploreJourney_2": "with a fun journey",
+  "exploreDescription": "Explore the exciting world of blockchain ecology through the jump game. Every step could bring surprises, and every jump is a new discovery.",
+  "connectWallet": "Connect Wallet",
+  "startGame": "Start Game",
+  "walletConnected": "Wallet connected",
+  "pleaseConnectWallet": "Please connect your wallet before starting the game!"
+}
