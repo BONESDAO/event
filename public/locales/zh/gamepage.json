@@ -1,0 +1,18 @@
+{
+    "game_title": "跳格子游戏",
+    "game_description": "探索生态世界，收集奖励",
+    "game_status": "游戏状态",
+    "current_game_status": "当前游戏进度和得分",
+    "current_score": "当前积分",
+    "remaining_times": "剩余次数",
+    "free_attempts_today": "今天还有",
+    "times_left": "次免费次数",
+    "game_instructions": "游戏说明",
+    "game_rules": "了解游戏规则",
+    "dice_button_instruction": "点击“摇骰子”按钮时，消耗次数来移动",
+    "free_attempts_instruction": "每日一次免费次数，用尽免费次数后，需使用LAT购买次数，10LAT/1次",
+    "special_tile_instruction": "彩色格子为惊喜格子，可能获得特殊奖励",
+    "normal_tile_instruction": "白色格子为普通格子",
+    "win_instruction": "按照路径前进到第100个格子即可获胜！",
+    "reward_instruction": "获胜后请到奖励中心兑换奖励"
+  }

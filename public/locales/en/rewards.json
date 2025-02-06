@@ -1,0 +1,16 @@
+{
+      "back_to_game": "Back to Game",
+      "title": "Rewards Center",
+      "description": "Use your points to redeem exciting rewards",
+      "myPoints": "My Points",
+      "canRedeem": "You can redeem the rewards below with these points",
+      "points": "Points",
+      "sdwhPoints": "sDWH Points",
+      "rewardRequiredPoints": "Required Points: ",
+      "redeem": "Redeem",
+      "notEnoughPoints": "You don't have enough points to redeem this reward!",
+      "walletNotConnected": "Please connect your wallet first!",
+      "exchangeSuccess": "Redemption Successful!",
+      "exchangeSuccessDescription": "You have successfully redeemed {amount} {rewardName}"
+    
+  }
