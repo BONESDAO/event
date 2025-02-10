@@ -14,5 +14,9 @@
     "special_tile_instruction": "Colored tiles are surprise tiles, may give special rewards",
     "normal_tile_instruction": "White tiles are regular tiles",
     "win_instruction": "Move along the path and reach the 100th tile to win!",
-    "reward_instruction": "After winning, go to the rewards center to redeem your rewards"
+    "reward_instruction": "After winning, go to the rewards center to redeem your rewards",
+    "paying": "Paying...",
+    "paymentsuccess": "Payment successful, please wait...",
+    "used_up_count": "You have used up your free count for today and will use your regular count after that.",
+    "tips": "Tips: Please click on the dice again to continue the game!"
   }

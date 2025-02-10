@@ -10,5 +10,13 @@
   "connectWallet": "连接钱包",
   "startGame": "开始游戏",
   "walletConnected": "已连接钱包",
-  "pleaseConnectWallet": "请先连接钱包才能开始游戏！"
+  "pleaseConnectWallet": "请先连接钱包才能开始游戏！",
+  "game_instructions": "游戏说明",
+  "game_rules": "了解游戏规则",
+  "dice_button_instruction": "点击“摇骰子”按钮时，消耗次数来移动",
+  "free_attempts_instruction": "每日一次免费次数，用尽免费次数后，需使用LAT购买次数，10LAT/1次",
+  "special_tile_instruction": "彩色格子为惊喜格子，可能获得特殊奖励",
+  "normal_tile_instruction": "白色格子为普通格子",
+  "win_instruction": "按照路径前进到第100个格子即可获胜！",
+  "reward_instruction": "获胜后请到奖励中心兑换奖励"
 }
