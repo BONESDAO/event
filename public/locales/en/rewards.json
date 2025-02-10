@@ -11,6 +11,6 @@
       "notEnoughPoints": "You don't have enough points to redeem this reward!",
       "walletNotConnected": "Please connect your wallet first!",
       "exchangeSuccess": "Redemption Successful!",
-      "exchangeSuccessDescription": "You have successfully redeemed {amount} {rewardName}"
-    
+      "dice": "Dice",
+      "exchanging": "Redemption in progress, please wait..."
   }

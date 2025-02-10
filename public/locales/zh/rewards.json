@@ -11,6 +11,6 @@
       "notEnoughPoints": "您的积分不足，无法兑换此奖励！",
       "walletNotConnected": "请先连接钱包！",
       "exchangeSuccess": "兑换成功！",
-      "exchangeSuccessDescription": "你已成功兑换 {amount} {rewardName}"
-
+      "dice": "骰子",
+      "exchanging": "正在兑换中，请稍后..."
   }

@@ -218,7 +218,7 @@ export default function RewardsPage() {
       }
       console.log("当前语言设置:", i18n.language);
     }
-    console.log("walletAddress",walletAddress)
+    console.log("walletAddress", walletAddress);
 
     // 获取积分
     if (walletAddress) {
@@ -233,7 +233,7 @@ export default function RewardsPage() {
     }
 
     setRewards([
-      { id: "1", name: "骰子", cost: 10, amount: 1, category: "骰子" },
+      { id: "1", name: "Dice", cost: 10, amount: 1, category: "骰子" },
       { id: "2", name: "LAT", cost: 8, amount: 8.88, category: "LAT" },
       { id: "3", name: "LAT", cost: 10, amount: 9.99, category: "LAT" },
       { id: "4", name: "LAT", cost: 15, amount: 16.88, category: "LAT" },
@@ -263,6 +263,8 @@ export default function RewardsPage() {
 
     // 对于 LAT 和 USDT 调用兑换奖励的API
     if (reward.category === "LAT" || reward.category === "USDT") {
+      toast({ title: t("exchanging") });
+
       const exchangeSuccess = await exchangeReward(walletAddress, reward);
       if (!exchangeSuccess) return; // 兑换失败，退出
 
@@ -272,12 +274,14 @@ export default function RewardsPage() {
 
       toast({
         title: t("exchangeSuccess"),
-        description: t("exchangeSuccessDescription"),
+        description: `${reward.amount} ${reward.name}`,
       });
     }
 
     // 对于 骰子、sDWH 等奖励，直接更新本地数据
     if (reward.category === "骰子") {
+      toast({ title: t("exchanging") });
+      
       const newRemainingTimes = reward.amount;
       await updateRemainingTimes(walletAddress, newRemainingTimes);
       await updateUserScore(walletAddress, newScore);
@@ -285,11 +289,13 @@ export default function RewardsPage() {
 
       toast({
         title: t("exchangeSuccess"),
-        description: t("exchangeSuccessDescription"),
+        description: `${reward.amount} ${reward.name}`,
       });
     }
 
     if (reward.category === "sDWH") {
+      toast({ title: t("exchanging") });
+
       const newSDFW = reward.amount;
       await updateUserSDFW(walletAddress, newSDFW);
       await updateUserScore(walletAddress, newScore);
@@ -297,7 +303,7 @@ export default function RewardsPage() {
 
       toast({
         title: t("exchangeSuccess"),
-        description: t("exchangeSuccessDescription"),
+        description: `${reward.amount} ${reward.name}`,
       });
     }
   };

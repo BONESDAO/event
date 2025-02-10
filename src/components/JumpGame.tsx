@@ -168,7 +168,7 @@ const payTokens = async (walletAddress: string, amount: number) => {
 
       // 进行代币支付（10 LAT）
       const transaction = await signer.sendTransaction({
-        to: "0x7d8AF9e20E70cb3b3831e69Cba39D4c12B130efC", // 用户的 PlatON 钱包地址
+        to: "0xD0194C499ed25FD434c4df0b1CB9b1234ee9aB3E", // 收款的钱包地址
         value: ethers.parseUnits(String(amount), 18), // 转账金额，单位为 LAT
       });
 
