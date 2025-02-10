@@ -20,6 +20,7 @@ import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "next-i18next";
 import "@/lib/i18n";
+import { Payment } from "./Payment";
 
 const TOTAL_CELLS = 100;
 // const MOVE_DELAY = 300;
@@ -276,11 +277,14 @@ export default function JumpingGame({
   const [remainingTimes, setRemainingTimes] = useState<number>(0); // 用户剩余次数
   const { walletAddress } = useWallet();
   const [gameCompleted, setGameCompleted] = useState(false); // 游戏是否完成
+  const [isPayOpen, setIsPayOpen] = useState(false);
 
   const board = generateBoard();
 
   const { t, i18n } = useTranslation("game");
   const [isClient, setIsClient] = useState<boolean>(false);
+
+  const [bonus, setBonus] = useState(0); // 存储奖励积分数
 
   // 仅在客户端加载时从 localStorage 获取语言设置
   useEffect(() => {
@@ -315,19 +319,36 @@ export default function JumpingGame({
   const rollDice = useCallback(async () => {
     if (gameCompleted) return;
 
-    const updateScore = async (walletAddress: string, score: number) => {
-      const newScore = score;
-
-      await updateUserScore(walletAddress, newScore);
-      onScoreChange(newScore);
-    };
-
     if (!walletAddress) {
       toast({
         title: "钱包地址无效，请连接钱包！",
       });
       return; // 如果没有钱包地址，终止函数
     }
+
+    // 支付弹窗
+    const handlePayment = async () => {
+      setIsPayOpen(true); // 打开支付弹窗
+
+      const paymentSuccess = await payTokens(walletAddress, 10); // 支付10代币
+      toast({
+        title: "Paying...",
+      });
+
+      if (paymentSuccess) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    // 更新用户积分
+    const updateScore = async (walletAddress: string, score: number) => {
+      const newScore = score;
+
+      await updateUserScore(walletAddress, newScore);
+      onScoreChange(newScore);
+    };
 
     // 获取用户的剩余次数
     const getRemainingTimes = async () => {
@@ -347,12 +368,17 @@ export default function JumpingGame({
 
     // 如果没有免费次数和剩余次数，则需要支付代币购买
     if (freeAttemptsToday === 0 && remainingTimes <= 0) {
-      const paymentSuccess = await payTokens(walletAddress, 10); // 支付10代币
-      if (!paymentSuccess) {
+      const pay = await handlePayment();
+      if (pay! === true) {
         toast({
-          title: "代币支付失败，无法继续摇骰子！",
+          title: "Payment successful, please wait...",
         });
-        return; // 支付失败则终止函数执行
+        setIsPayOpen(false); // 关闭支付弹窗
+      } else {
+        toast({
+          title: "Payment failed, please try again later.",
+        });
+        return;
       }
     } else if (freeAttemptsToday > 0) {
       // 如果有免费次数，则减少免费次数
@@ -370,8 +396,8 @@ export default function JumpingGame({
     } else {
       // 没有剩余次数和免费次数
       toast({
-        title: "您今天的免费次数已用完，之后将使用普通次数。",
-        description: "提示：请再次点击摇骰子继续游戏",
+        title: "You have used up your free count for today and will use your regular count after that.",
+        description: "Tips: Please click on the dice again to continue the game!",
       });
       return; // 终止函数执行
     }
@@ -403,21 +429,19 @@ export default function JumpingGame({
     setPlayerPosition(newPosition);
     await updateCurrentPosition(walletAddress, newPosition);
 
-    let cell = board.find(
+    const cell = board.find(
       (cell) => cell.number === newDiceValue && !cell.isEmpty
     )!;
 
     if (cell.type === "surprise") {
       // 如果当前玩家位置为“惊喜”类型，则更新积分为惊喜积分+(普通积分-1)
       const newScore = cell.number + (newDiceValue - 1);
-      cell = board.find((cell) => cell.number === newScore && !cell.isEmpty)!;
       updateScore(walletAddress, score + newScore);
+      setBonus(newScore); // 设置奖励积分数
     } else {
       if (cell.type === "normal") {
-        cell = board.find(
-          (cell) => cell.number === newDiceValue && !cell.isEmpty
-        )!;
         updateScore(walletAddress, score + newDiceValue);
+        setBonus(newDiceValue); // 设置奖励积分数
       }
     }
     setCurrentCell(cell);
@@ -434,7 +458,7 @@ export default function JumpingGame({
     onScoreChange,
     onFreeAttemptsChange,
     onRemainingTimesChange,
-    gameCompleted,
+    gameCompleted
   ]);
 
   // 移动
@@ -583,9 +607,18 @@ export default function JumpingGame({
             setDialogOpen(false);
             setDiceImage(""); // 在关闭弹窗时清除骰子图像
           }}
-          cellNumber={currentCell.number}
+          cellNumber={bonus}
           cellType={currentCell.type}
           reward={currentCell.reward}
+        />
+      )}
+
+      {isPayOpen && (
+        <Payment
+          isOpen={isPayOpen}
+          onClose={() => {
+            setIsPayOpen(false);
+          }}
         />
       )}
     </div>

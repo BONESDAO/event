@@ -14,5 +14,9 @@
     "special_tile_instruction": "彩色格子为惊喜格子，可能获得特殊奖励",
     "normal_tile_instruction": "白色格子为普通格子",
     "win_instruction": "按照路径前进到第100个格子即可获胜！",
-    "reward_instruction": "获胜后请到奖励中心兑换奖励"
+    "reward_instruction": "获胜后请到奖励中心兑换奖励",
+    "paying": "正在支付...",
+    "paymentsuccess": "支付成功，请稍等...",
+    "used_up_count": "您今天的免费次数已用完，之后将使用普通次数。",
+    "tips": "提示：请再次点击 摇骰子 继续游戏"
   }

@@ -8,7 +8,13 @@ import { useWallet } from "@/app/context/WalletContext";
 import Abi from "@/contracts/abi.json";
 import { ethers } from "ethers";
 import { toast } from "@/hooks/use-toast";
-import { Card, CardContent } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { UserAvatar } from "./UserAvatar";
 import { useTranslation } from "next-i18next";
 import "../lib/i18n";
@@ -182,23 +188,45 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between relative">
-      <Card className="flex absolute top-6 right-6 items-center object-fill">
-        <CardContent className="flex p-4 gap-4">
-          <UserAvatar address={walletAddress!} size={32} />
-          {walletAddress && (
-            <div>
-              <p>
-                {t("walletAddress")} {walletAddress.slice(0, 6)}...
-                {walletAddress.slice(-4)}
-              </p>
-              <p>
-                {t("currentScore")} {score}
-              </p>
-            </div>
-          )}
-        </CardContent>
+      <Card className="flex mt-6 px-6 text-center text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 p-4 shadow-md text-white">
+        Date of event : Jan 27 —— Feb 27
       </Card>
-      <Card className="fixed flex bottom-8 right-6 p-6 m-2 space-x-8">
+      <div className="flex flex-col absolute top-6 right-6 gap-4 w-72">
+        <Card className="flex items-center object-fill">
+          <CardContent className="flex p-4 gap-4">
+            <UserAvatar address={walletAddress!} size={32} />
+            {walletAddress && (
+              <div>
+                <p>
+                  {t("walletAddress")} {walletAddress.slice(0, 6)}...
+                  {walletAddress.slice(-4)}
+                </p>
+                <p>
+                  {t("currentScore")} {score}
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("game_instructions")}</CardTitle>
+            <CardDescription>{t("game_rules")}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-4 space-y-2 text-sm text-muted-foreground">
+              <li>{t("dice_button_instruction")}</li>
+              <li>{t("free_attempts_instruction")}</li>
+              <li>{t("special_tile_instruction")}</li>
+              <li>{t("normal_tile_instruction")}</li>
+              <li>{t("win_instruction")}</li>
+              <li>{t("reward_instruction")}</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="fixed flex bottom-4 right-4 p-6 m-2 space-x-4 w-72">
         <div className="flex flex-col justify-center items-center space-y-4">
           <Button
             onClick={interact}
@@ -242,34 +270,33 @@ export default function HomePage() {
               </motion.p>
 
               <motion.div
-                className="space-x-4 flex justify-center mb-36"
+                className="space-x-4 flex justify-center mb-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white"
-                  onClick={connectMetaMask}
-                  disabled={!walletAddress === false}
-                >
-                  {t("connectWallet")}
-                </Button>
-
-                {/* 控制按钮的启用和链接 */}
-                <Link href={walletAddress ? `/game` : "#"}>
+                {!walletAddress === false ? (
+                  <Link href={walletAddress ? `/game` : "#"}>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className={`bg-gradient-to-r from-indigo-500 to-purple-500 text-white ${
+                        !walletAddress ? "cursor-not-allowed opacity-50" : ""
+                      }`}
+                    >
+                      {t("startGame")}
+                    </Button>
+                  </Link>
+                ) : (
                   <Button
                     variant="outline"
                     size="lg"
-                    className={`bg-gradient-to-r from-indigo-500 to-purple-500 text-white ${
-                      !walletAddress ? "cursor-not-allowed opacity-50" : ""
-                    }`}
-                    disabled={!walletAddress} // 禁用按钮
+                    className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white"
+                    onClick={connectMetaMask}
                   >
-                    {t("startGame")}
+                    {t("connectWallet")}
                   </Button>
-                </Link>
+                )}
               </motion.div>
 
               {walletAddress && (
